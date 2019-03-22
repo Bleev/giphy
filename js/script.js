@@ -2,7 +2,7 @@
 //******************TEST EARLY AND OFTEN USING console.log() ******************
 //****************** SERIOUSLY TEST USING console.log()!!! ******************
 /* global $ */
-
+var picurl;
 $("#search-button").click(function(){
 
     $('.gallery').empty();
@@ -13,16 +13,20 @@ $("#search-button").click(function(){
         method: "GET",
         success: function(response){
             var randomgifboi = Math.floor(Math.random() * response.data.length);
-            var width = response.data[randomgifboi].images.fixed_width.url;
+            picurl = response.data[randomgifboi].images.fixed_width.url;
             $('.gallery').append(
                 '<div class="mainthing">\
-                    <a class="thumbnail" href =' + width + ' >\
-                        <img src=' + width + '/>\
+                    <a class="thumbnail" href =' + picurl + ' >\
+                        <img src=' + picurl + '/>\
                     </a>\
                 </div>'
             );
         },
     }); 
 });
-
+$("#mail-button").click(function(){
+        var friendmail = $('#mail-term').val();
+        var mailtolink = 'mailto:'+ friendmail + '?subject=giphy' + '&body=' + picurl;
+        window.location.href = mailtolink;
+});
 
